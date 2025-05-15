@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1> NAUFAL</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#social-media">Social Media</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" tabindex="0">
+      <img src="foto.jpg" alt="Naufal" />
+      <p>Halo,Nama saya Naufal Aliffauzi Zaniputra.Saya adalah mahasiswa Universitas Ahmad Dahlan,Jurusan Informatika</p>
+    </section>
+
+    <section id="social-media" tabindex="0">
+      <h2>Social Media</h2>
+      <ul>
+        <li>
+          <span class="icon" aria-label="Instagram">&#128081;</span>
+          <a href="https://www.instagram.com/palnopalllll_?igsh=ajN6Mng4aHZkbjJ6" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </li>
+        <li>
+          <span class="icon" aria-label="GitHub">&#128187;</span>
+          <a href="https://github.com/NaufalAliffauzi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact" tabindex="0">
+      <h2>Contact Me</h2>
+      <form id="contactForm" novalidate>
+        <label for="name">Nama</label>
+        <input type="text" id="name" name="name" placeholder="" required minlength="2" />
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="" required />
+        
+        <label for="message">Pesan</label>
+        <textarea id="message" name="message" rows="5" placeholder="" required minlength="10"></textarea>
+        
+        <button type="submit">Kirim Pesan</button>
+      </form>
+      <p id="formMessage" aria-live="polite" style="margin-top:1rem;"></p>
+    </section>
+  </main>
+
+  <script>
+    // Form validation and feedback
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      formMessage.textContent = '';
+      
+      // Basic validation checks
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      let errorMessages = [];
+
+      if (name.length < 2) {
+        errorMessages.push('kurang dari 2 karakter');
+      }
+
+      // Email pattern simple validation
+      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if (!emailPattern.test(email)) {
+        errorMessages.push('Please enter a valid email address.');
+      }
+
+      if (message.length < 10) {
+        errorMessages.push('Kurang dari 10 karakter.');
+      }
+
+      if (errorMessages.length > 0) {
+        formMessage.style.color = '#ff5555';
+        formMessage.textContent = errorMessages.join(' ');
+        return;
+      }
+
+      // If validation passed
+      formMessage.style.color = '#00ffcc';
+      formMessage.textContent = 'Terimakasih.';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
+
